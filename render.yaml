@@ -34,7 +34,6 @@ services:
   - type: web
     name: tekshe
     runtime: static
-    region: frankfurt
     rootDir: frontend
     buildCommand: npm ci --include=dev && npm run build
     staticPublishPath: dist
