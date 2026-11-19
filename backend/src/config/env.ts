@@ -15,13 +15,27 @@ const ROLES = ['admin', 'mentor', 'student', 'employer'] as const satisfies read
 const login = z.string().regex(LOGIN_RE, 'login 3–32 belgi: háripler, sanlar, . _ - (@ bolmasın)').optional();
 const password = z.string().min(8, 'parol keminde 8 belgi bolsın').optional();
 
+/**
+ * Render/Neon panelinen kóshirgende jiyi bolatuǵın artıqshalıqlardı alıp taslaydı:
+ * ushındaǵı bos orınlar, qos/bir qosh tırnaq, Neon'nıń `psql '…'` buyrıǵı. Bos mán — berilmegen dep esaplanadı.
+ */
+const cleanDatabaseUrl = (v: unknown) => {
+  if (typeof v !== 'string') return v;
+  const cleaned = v
+    .trim()
+    .replace(/^psql\s+/i, '')
+    .replace(/^['"]+|['"]+$/g, '')
+    .trim();
+  return cleaned === '' ? undefined : cleaned;
+};
+
 const schema = z.object({
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
   PORT: z.coerce.number().int().positive().default(4000),
   CORS_ORIGIN: z.string().default('http://localhost:5173'),
   DATA_FILE: z.string().default('./data/db.json'),
   // Postgres (Neon) qosılıw URL'i. Berilse — JSON fayl ornına usı isletiledi
-  DATABASE_URL: z.string().url('DATABASE_URL durıs URL emes').optional(),
+  DATABASE_URL: z.preprocess(cleanDatabaseUrl, z.string().regex(/^postgres(ql)?:\/\/\S+$/,'DATABASE_URL «postgresql://» menen baslanıwı hám bos orın bolmawı kerek').optional()),
   JWT_SECRET: z.string({ required_error: 'JWT_SECRET .env de kórsetilmegen' }).min(16, 'JWT_SECRET keminde 16 belgi bolsın'),
   ADMIN_LOGIN: login,
   ADMIN_PASSWORD: password,
