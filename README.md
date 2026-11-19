@@ -83,7 +83,7 @@ Bazanı basınan baslaw ushın — bul fayldı óshiriń. Grantlar, mentorlar, v
 
 ## Deploy: GitHub → Render + Neon (bári tegin)
 
-Qurılıs: **Neon** (Postgres baza) ← **tekshe-api** (Render Web Service, Node) ← **tekshe-web** (Render Static Site, React).
+Qurılıs: **Neon** (Postgres baza) ← **tekshe-api** (Render Web Service, Node) ← **tekshe** (Render Static Site, React).
 Sazlawlar `render.yaml` Blueprint'inde tayar.
 
 ### 1. Neon (baza)
@@ -108,11 +108,11 @@ git push -u origin main
    | --- | --- |
    | `DATABASE_URL` | Neon pooled URL |
    | `ADMIN_LOGIN` / `ADMIN_PASSWORD` | admin akkaunt (parol keminde 8 belgi) |
-   | `CORS_ORIGIN` | dáslep waqıtsha `https://tekshe-web.onrender.com` (tómende dúzetiledi) |
+   | `CORS_ORIGIN` | dáslep waqıtsha `https://tekshe.onrender.com` (tómende dúzetiledi) |
    `JWT_SECRET` Render tárepinen avtomat jaratıladı.
-3. **tekshe-web** ushın: `VITE_API_URL` = `https://tekshe-api.onrender.com/api` (api xızmetiniń haqıyqıy URL i + `/api`).
+3. **tekshe** ushın: `VITE_API_URL` = `https://tekshe-api.onrender.com/api` (api xızmetiniń haqıyqıy URL i + `/api`).
 4. Eki xızmet te deploy bolǵannan keyin Render bergen **haqıyqıy URL lerdi** tekseriń:
-   - Frontend URL i `tekshe-web.onrender.com` den ayrıqsha bolsa → api daǵı `CORS_ORIGIN` di sol URL ge ózgertiń (sońında `/` bolmasın).
+   - Frontend URL i `tekshe.onrender.com` den ayrıqsha bolsa → api daǵı `CORS_ORIGIN` di sol URL ge ózgertiń (sońında `/` bolmasın).
    - Api URL i ayrıqsha bolsa → web daǵı `VITE_API_URL` di dúzetip, web ti **Manual Deploy** etiń (bul mán build waqtında kodqa jazıladı).
 5. Tekseriw: `https://<api>/api/health` → `{"status":"ok"}`, keyin saytqa kirip `ADMIN_LOGIN` menen kiriń.
 

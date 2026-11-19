@@ -22,7 +22,7 @@ services:
         sync: false
       - key: JWT_SECRET
         generateValue: true
-      # Frontend mánzili (mısalı https://tekshe-web.onrender.com) — frontend jaratılǵannan keyin kiritiledi
+      # Frontend mánzili (mısalı https://tekshe.onrender.com) — frontend jaratılǵannan keyin kiritiledi
       - key: CORS_ORIGIN
         sync: false
       - key: ADMIN_LOGIN
@@ -32,7 +32,7 @@ services:
 
   # ───────── Frontend (React / Vite, statik sayt) ─────────
   - type: web
-    name: tekshe-web
+    name: tekshe
     runtime: static
     region: frankfurt
     rootDir: frontend
