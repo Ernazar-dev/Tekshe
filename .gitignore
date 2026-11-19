@@ -1,0 +1,38 @@
+# ───────── Bog'liqliklar va build ─────────
+node_modules/
+dist/
+build/
+coverage/
+*.tsbuildinfo
+.vite/
+
+# ───────── Sırlar: HESH QACHAN GitHub'qa jiberilmeydi ─────────
+.env
+.env.*
+!.env.example
+
+# ───────── Lokal baza (JSON fayl) ─────────
+backend/data/
+
+# ───────── Loglar, vaqtinchalik fayllar ─────────
+*.log
+npm-debug.log*
+*.tmp
+.cache/
+
+# ───────── Sistema / muharrir ─────────
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# ───────── Claude Code lokal sazlamalari ─────────
+.claude/settings.local.json
+.claude/scratch/
+
+# ───────── Deploy'ǵa kerek emes materiallar (prezentaciya hám eski demo betler) ─────────
+# Kerek bolsa, tómendegi qatarlardı óshirip qoyıń
+*.pptx
+/*.html

@@ -1,0 +1,490 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ════════════════════════ Asos ════════════════════════ */
+:root {
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+  --gold-gradient: linear-gradient(135deg, #f3dd9e 0%, #c29a45 45%, #8f6a24 100%);
+  --brand-gradient: linear-gradient(135deg, #0b1530 0%, #1b3768 100%);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 88px;
+  }
+  body {
+    @apply bg-canvas font-sans text-ink antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: rgba(194, 154, 69, 0.28);
+  }
+  :focus-visible {
+    outline: 2px solid theme('colors.accent.DEFAULT');
+    outline-offset: 3px;
+  }
+  h1,
+  h2,
+  h3 {
+    overflow-wrap: break-word;
+  }
+  .grid > * {
+    min-width: 0;
+  }
+  body:has(dialog[open]) {
+    overflow: hidden;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-7xl px-4 md:px-8;
+  }
+  .font-serif-title {
+    @apply font-serif;
+    letter-spacing: -0.015em;
+    font-variant-numeric: lining-nums;
+  }
+  .eyebrow {
+    @apply text-[11px] font-semibold uppercase tracking-[0.28em] text-muted;
+  }
+
+  /* Túymeler */
+  .btn {
+    @apply inline-flex min-h-[46px] items-center justify-center gap-3 rounded-md px-6 text-[15px] font-semibold no-underline transition-all duration-300 ease-premium disabled:cursor-not-allowed disabled:opacity-60;
+  }
+  .btn-dark {
+    @apply btn text-white;
+    background: var(--brand-gradient);
+    box-shadow: 0 10px 26px -10px rgba(11, 21, 48, 0.7);
+  }
+  .btn-dark:not(:disabled):hover {
+    filter: brightness(1.08);
+    transform: translateY(-1px);
+  }
+  .btn-gold {
+    @apply btn text-[#1a1306];
+    background: var(--gold-gradient);
+    box-shadow: 0 10px 28px -10px rgba(194, 154, 69, 0.75);
+  }
+  .btn-gold:hover {
+    filter: brightness(1.06);
+    transform: translateY(-1px);
+  }
+  .btn-outline {
+    @apply btn border border-solid border-line bg-white text-ink hover:border-primary/50 hover:text-primary;
+  }
+  .btn-ghost-light {
+    @apply btn border border-solid border-white/25 bg-white/5 text-white backdrop-blur hover:border-accent-light/60 hover:bg-white/10;
+  }
+  .btn:not(:disabled):active {
+    transform: scale(0.97);
+  }
+
+  /* Kartalar */
+  .card {
+    @apply rounded-2xl border border-solid border-line bg-white shadow-card;
+  }
+  .lift {
+    transition:
+      transform 0.45s var(--ease-premium),
+      box-shadow 0.45s var(--ease-premium),
+      border-color 0.45s ease;
+  }
+  .lift:hover {
+    @apply -translate-y-1 border-primary/30 shadow-lift;
+  }
+
+  /* Forma maydanları */
+  .input {
+    @apply min-h-[46px] w-full rounded-md border border-solid border-line bg-white px-3.5 text-[15px] text-ink transition-colors placeholder:text-muted/70 hover:border-accent/50 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/15;
+  }
+  .input[aria-invalid='true'] {
+    @apply border-red-600 focus:ring-red-600/15;
+  }
+
+  .chip {
+    @apply inline-flex min-h-[40px] items-center gap-2 rounded-full border border-solid px-4 text-sm font-medium transition-all duration-300 ease-premium;
+  }
+  .chip-off {
+    @apply chip border-line bg-white text-ink hover:border-primary/50 hover:text-primary;
+  }
+  .chip-on {
+    @apply chip border-transparent text-white;
+    background: var(--brand-gradient);
+    box-shadow: 0 8px 20px -10px rgba(11, 21, 48, 0.7);
+  }
+}
+
+/* ════════════════════════ Dekor ════════════════════════ */
+.text-gold-gradient {
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.gold-rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(194, 154, 69, 0.75), transparent);
+}
+/* Mayda «dán» teksturası — tegis fonlarǵa material sezimin beredi */
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+/* Shıǵıs geometriyalıq ornamenti */
+.pattern-girih {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='%23c29a45' stroke-opacity='0.16' stroke-width='1'%3E%3Cpath d='M36 4l9.4 22.6L68 36l-22.6 9.4L36 68l-9.4-22.6L4 36l22.6-9.4z'/%3E%3Cpath d='M36 18l5.2 12.8L54 36l-12.8 5.2L36 54l-5.2-12.8L18 36l12.8-5.2z'/%3E%3Cpath d='M0 0l14 14M72 0L58 14M0 72l14-14M72 72L58 58'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 72px 72px;
+}
+.glass-dark {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+/* Aurora — áste qozǵalatuǵın reńli daqlar */
+.aurora {
+  position: absolute;
+  inset: -20%;
+  pointer-events: none;
+  filter: blur(70px);
+  opacity: 0.75;
+}
+.aurora span {
+  position: absolute;
+  border-radius: 50%;
+  mix-blend-mode: screen;
+  animation: aurora-drift 22s var(--ease-premium) infinite alternate;
+}
+.aurora span:nth-child(1) {
+  width: 46%;
+  height: 52%;
+  left: 8%;
+  top: 6%;
+  background: radial-gradient(circle, rgba(52, 96, 178, 0.85), transparent 65%);
+}
+.aurora span:nth-child(2) {
+  width: 38%;
+  height: 46%;
+  right: 6%;
+  top: 18%;
+  background: radial-gradient(circle, rgba(194, 154, 69, 0.55), transparent 65%);
+  animation-duration: 28s;
+  animation-delay: -6s;
+}
+.aurora span:nth-child(3) {
+  width: 42%;
+  height: 40%;
+  left: 34%;
+  bottom: 2%;
+  background: radial-gradient(circle, rgba(92, 60, 160, 0.5), transparent 65%);
+  animation-duration: 34s;
+  animation-delay: -12s;
+}
+
+/* Kursorǵa eriwshi jaqtılıq (spotlight) */
+.spotlight {
+  position: relative;
+  isolation: isolate;
+}
+.spotlight::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  background: radial-gradient(380px circle at var(--mx, 50%) var(--my, 50%), rgba(194, 154, 69, 0.16), transparent 45%);
+}
+.spotlight:hover::before {
+  opacity: 1;
+}
+
+/* Navigaciya siltemeleri — altın astı sızıq */
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--gold-gradient);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s var(--ease-premium);
+}
+.link-underline:hover::after,
+.link-underline.active::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ════════════════════════ Animaciyalar ════════════════════════ */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes word-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 110%, 0) rotate(4deg);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes aurora-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(8%, -6%, 0) scale(1.15);
+  }
+  100% {
+    transform: translate3d(-6%, 8%, 0) scale(0.95);
+  }
+}
+@keyframes float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -10px, 0);
+  }
+}
+@keyframes line-grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes draw-line {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+@keyframes dash-flow {
+  to {
+    stroke-dashoffset: -44;
+  }
+}
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes arch-reveal {
+  from {
+    clip-path: inset(100% 0 0 0 round 220px 220px 24px 24px);
+  }
+  to {
+    clip-path: inset(0 0 0 0 round 220px 220px 24px 24px);
+  }
+}
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(194, 154, 69, 0.45);
+  }
+  100% {
+    box-shadow: 0 0 0 14px rgba(194, 154, 69, 0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.8s var(--ease-premium) both;
+}
+.animate-fade-in {
+  animation: fade-in 0.6s ease both;
+}
+.animate-float {
+  animation: float 7s ease-in-out infinite;
+}
+.animate-line-grow {
+  transform-origin: left;
+  animation: line-grow 0.9s var(--ease-premium) both;
+}
+.animate-draw-line {
+  transform-origin: top;
+  animation: draw-line 1.6s var(--ease-premium) both;
+}
+.animate-dash {
+  animation: dash-flow 2.4s linear infinite;
+}
+.animate-spin-slow {
+  animation: spin-slow 80s linear infinite;
+}
+.animate-arch {
+  animation: arch-reveal 1.4s cubic-bezier(0.77, 0, 0.18, 1) 0.15s both;
+}
+/* Bas bet hero: súwret shepten ońǵa ashıladı hám azǵana uzaqlasıp ornına túsedi */
+@keyframes wipe-in {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes zoom-settle {
+  from {
+    transform: scale(1.06);
+  }
+  to {
+    transform: none;
+  }
+}
+.animate-hero-reveal {
+  animation:
+    wipe-in 1.5s cubic-bezier(0.77, 0, 0.18, 1) 0.2s both,
+    zoom-settle 2.6s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+}
+.animate-hero-wipe {
+  animation: wipe-in 1.6s cubic-bezier(0.77, 0, 0.18, 1) 0.2s both;
+}
+/* Súwret ornına túskennen keyin júdá áste jaqınlasıw (Ken Burns) */
+@keyframes ken-burns {
+  from {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.07) translate3d(-1.5%, -1%, 0);
+  }
+}
+.animate-hero-photo {
+  transform-origin: 60% 40%;
+  animation:
+    zoom-settle 2.8s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both,
+    ken-burns 24s ease-in-out 3s infinite alternate;
+}
+/* Ashılıw shegarası boylap júretuǵın altın nur */
+@keyframes hero-sweep {
+  0% {
+    left: 0;
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+.animate-hero-sweep {
+  animation: hero-sweep 1.6s cubic-bezier(0.77, 0, 0.18, 1) 0.2s both;
+}
+.animate-pulse-ring {
+  animation: pulse-ring 2.4s ease-out infinite;
+}
+
+/* Sarlawha sózleri birme-bir kóteriledi */
+.word-reveal {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-bottom: 0.08em;
+}
+.word-reveal > span {
+  display: inline-block;
+  animation: word-rise 0.9s var(--ease-premium) both;
+}
+
+/* Scroll boyınsha payda bolıw (Reveal komponenti) */
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+  transition:
+    opacity 0.9s var(--ease-premium),
+    transform 0.9s var(--ease-premium);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.page-enter {
+  animation: fade-up 0.55s var(--ease-premium) both;
+}
+
+/* Modal */
+dialog.modal {
+  width: min(520px, calc(100% - 32px));
+  max-height: calc(100dvh - 48px);
+  padding: 0;
+  border: 0;
+  border-radius: 20px;
+  background: #fff;
+  color: theme('colors.ink');
+  box-shadow: 0 30px 90px -20px rgba(11, 21, 48, 0.45);
+}
+dialog.modal[open] {
+  animation: fade-up 0.45s var(--ease-premium) both;
+}
+dialog.modal::backdrop {
+  background: rgba(11, 21, 48, 0.55);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+/* Háreketti azaytıw sazlawı — barlıq animaciyalar óshedi */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Sarlawha kursiv sózler ushın jarqın gradient */
+.text-brand-gradient {
+  background: linear-gradient(100deg, #8f6a24 0%, #c29a45 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
