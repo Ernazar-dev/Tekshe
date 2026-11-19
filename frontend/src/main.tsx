@@ -6,6 +6,24 @@ import { App } from './App';
 import { ApiError } from './lib/api';
 import { AuthProvider } from './lib/auth';
 import { antdLocale, antdTheme } from './lib/theme';
+import '@fontsource/inter/latin-400.css';
+import '@fontsource/inter/latin-ext-400.css';
+import '@fontsource/inter/latin-500.css';
+import '@fontsource/inter/latin-ext-500.css';
+import '@fontsource/inter/latin-600.css';
+import '@fontsource/inter/latin-ext-600.css';
+import '@fontsource/inter/latin-700.css';
+import '@fontsource/inter/latin-ext-700.css';
+import '@fontsource/playfair-display/latin-500.css';
+import '@fontsource/playfair-display/latin-ext-500.css';
+import '@fontsource/playfair-display/latin-600.css';
+import '@fontsource/playfair-display/latin-ext-600.css';
+import '@fontsource/playfair-display/latin-700.css';
+import '@fontsource/playfair-display/latin-ext-700.css';
+import '@fontsource/playfair-display/latin-400-italic.css';
+import '@fontsource/playfair-display/latin-ext-400-italic.css';
+import '@fontsource/playfair-display/latin-500-italic.css';
+import '@fontsource/playfair-display/latin-ext-500-italic.css';
 import './index.css';
 
 const queryClient = new QueryClient({
