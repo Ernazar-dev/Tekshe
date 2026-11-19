@@ -23,6 +23,7 @@ const cleanDatabaseUrl = (v: unknown) => {
   if (typeof v !== 'string') return v;
   const cleaned = v
     .trim()
+    .replace(/^(export\s+)?DATABASE_URL\s*=\s*/i, '')
     .replace(/^psql\s+/i, '')
     .replace(/^['"]+|['"]+$/g, '')
     .trim();
@@ -49,7 +50,19 @@ const schema = z.object({
 
 const parsed = schema.safeParse(process.env);
 if (!parsed.success) {
-  console.error('Qáte .env sazlawları (backend/.env.example ge qarań):', parsed.error.flatten().fieldErrors);
+  const fieldErrors = parsed.error.flatten().fieldErrors;
+  console.error('Qáte .env sazlawları (backend/.env.example ge qarań):', fieldErrors);
+  if (fieldErrors.DATABASE_URL) {
+    // Mánniń ózin (parol bar) shıǵarmaymız — tek forması: qáte nede ekenin kóriw ushın
+    const raw = process.env.DATABASE_URL ?? '';
+    console.error('DATABASE_URL diagnostikası:', {
+      uzınlıǵı: raw.length,
+      bosOrınBar: /\s/.test(raw),
+      postgresMenenBaslanadı: /^\s*['"]?postgres(ql)?:\/\//i.test(raw),
+      teńlikBelgisiBar: raw.includes('='),
+      '@BelgisiBar': raw.includes('@'),
+    });
+  }
   process.exit(1);
 }
 

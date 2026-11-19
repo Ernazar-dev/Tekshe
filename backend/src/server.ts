@@ -7,7 +7,13 @@ const pgStore = env.DATABASE_URL ? PgStore.fromUrl(env.DATABASE_URL, env.seed) :
 const store: Store = pgStore ?? new JsonStore(env.dataFile, env.seed);
 
 // Postgres: keste hám dáslepki maǵlıwmat server tińlawdan aldın tayarlanadı
-await pgStore?.init();
+try {
+  await pgStore?.init();
+} catch (err) {
+  // Qáte matninde baza paroli bolmaydı; tek sebebin kórsetemiz (host, SSL, parol qáte h.t.b.)
+  console.error('Postgres ge qosılıp bolmadı:', err instanceof Error ? err.message : err);
+  process.exit(1);
+}
 const app = createApp({ store, corsOrigins: env.corsOrigins, jwtSecret: env.JWT_SECRET });
 
 const server = app.listen(env.PORT, () => {
